@@ -16,4 +16,5 @@ script = ExtResource("1_0cfm0")
 texture = ExtResource("1_s334u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(-1, -1)
 shape = SubResource("CapsuleShape2D_43rf3")
