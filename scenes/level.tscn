@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=3 uid="uid://chuemuwmonj4d"]
+
+[ext_resource type="Script" path="res://scenes/level.gd" id="1_e1fgh"]
+[ext_resource type="Texture2D" uid="uid://co37qp8mnnh6l" path="res://PNG/Backgrounds/darkPurple.png" id="1_ics03"]
+[ext_resource type="PackedScene" uid="uid://b1o2irqdprjuq" path="res://scenes/player.tscn" id="2_58f1i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7b65e"]
+size = Vector2(33.5, 743)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tq1ay"]
+size = Vector2(1359, 31)
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_e1fgh")
+
+[node name="BG" type="Sprite2D" parent="."]
+position = Vector2(653, 361)
+scale = Vector2(5.32129, 3.05664)
+texture = ExtResource("1_ics03")
+
+[node name="Player" parent="." instance=ExtResource("2_58f1i")]
+position = Vector2(656, 511)
+
+[node name="Border" type="Node2D" parent="."]
+
+[node name="right" type="StaticBody2D" parent="Border"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Border/right"]
+position = Vector2(1321, 359)
+shape = SubResource("RectangleShape2D_7b65e")
+
+[node name="down" type="StaticBody2D" parent="Border"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Border/down"]
+position = Vector2(652.5, 733)
+shape = SubResource("RectangleShape2D_tq1ay")
+
+[node name="up" type="StaticBody2D" parent="Border"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Border/up"]
+position = Vector2(655, -15)
+shape = SubResource("RectangleShape2D_tq1ay")
+
+[node name="left" type="StaticBody2D" parent="Border"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Border/left"]
+position = Vector2(-16.5, 361)
+shape = SubResource("RectangleShape2D_7b65e")
+
+[node name="MeteorTimer" type="Timer" parent="."]
+wait_time = 0.7
+autostart = true
+
+[node name="Meteors" type="Node2D" parent="."]
+
+[node name="Lasers" type="Node2D" parent="."]
+
+[connection signal="laser" from="Player" to="." method="_on_player_laser"]
+[connection signal="timeout" from="MeteorTimer" to="." method="_on_meteor_timer_timeout"]
